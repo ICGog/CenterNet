@@ -225,11 +225,7 @@ class opts(object):
                              help='use ground truth depth.')
 
   def parse(self, args=''):
-    if args == '':
-      opt = self.parser.parse_args()
-    else:
-      opt = self.parser.parse_args(args)
-
+    opt = self.parser.parse_args('')
     opt.gpus_str = opt.gpus
     opt.gpus = [int(gpu) for gpu in opt.gpus.split(',')]
     opt.gpus = [i for i in range(len(opt.gpus))] if opt.gpus[0] >=0 else [-1]
