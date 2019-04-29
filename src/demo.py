@@ -38,13 +38,18 @@ def demo(opt):
     if os.path.isdir(opt.demo):
       image_names = []
       ls = os.listdir(opt.demo)
-      for file_name in sorted(ls):
+      imgs = []
+      for image_name in ls:
+        if '.png' in image_name and 'segmented' not in image_name:
+          imgs.append(image_name)
+      for file_name in sorted(imgs, key=lambda name: int(name.split('-')[1].split('.')[0])):
           ext = file_name[file_name.rfind('.') + 1:].lower()
           if ext in image_ext:
               image_names.append(os.path.join(opt.demo, file_name))
     else:
       image_names = [opt.demo]
-    
+
+    print(image_names)
     for (image_name) in image_names:
       ret = detector.run(image_name)
       time_str = ''
